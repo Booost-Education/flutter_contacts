@@ -1,3 +1,8 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android' version '1.5.21' apply false
+}
+
 buildscript {
     repositories {
         google()
@@ -6,10 +11,7 @@ buildscript {
 
     dependencies {
         classpath 'com.android.tools.build:gradle:7.0.2'
-}
-
-plugins {
-    id 'org.jetbrains.kotlin.android' version '1.5.21' apply false 
+    }
 }
 
 group 'flutter.plugins.contactsservice.contactsservice'
@@ -22,7 +24,6 @@ allprojects {
     }
 }
 
-apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 34
@@ -44,5 +45,4 @@ android {
 dependencies {
     testImplementation 'junit:junit:4.12'
     testImplementation 'com.google.truth:truth:1.0'
-}
 }
