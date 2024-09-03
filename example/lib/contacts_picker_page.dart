@@ -9,7 +9,7 @@ class ContactPickerPage extends StatefulWidget {
 }
 
 class _ContactPickerPageState extends State<ContactPickerPage> {
-  Contact _contact;
+  late Contact _contact;
 
   @override
   void initState() {
@@ -18,11 +18,15 @@ class _ContactPickerPageState extends State<ContactPickerPage> {
 
   Future<void> _pickContact() async {
     try {
-      final Contact contact = await ContactsService.openDeviceContactPicker(
+      Contact? contact = await ContactsService.openDeviceContactPicker(
           iOSLocalizedLabels: iOSLocalizedLabels);
-      setState(() {
-        _contact = contact;
-      });
+      if (contact != null) {
+        setState(() {
+          _contact = contact;
+        });
+      } else {
+        print('No contact was selected.');
+      }
     } catch (e) {
       print(e.toString());
     }
@@ -40,7 +44,7 @@ class _ContactPickerPageState extends State<ContactPickerPage> {
             onPressed: _pickContact,
           ),
           if (_contact != null)
-            Text('Contact selected: ${_contact.displayName}'),
+            Text('Contact selected: ${_contact!.displayName}'),
         ],
       )),
     );
