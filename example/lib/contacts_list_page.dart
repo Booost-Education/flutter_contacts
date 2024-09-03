@@ -88,7 +88,7 @@ class _ContactListPageState extends State<ContactListPage> {
       body: SafeArea(
         child: _contacts != null
             ? ListView.builder(
-                itemCount: _contacts?.length ?? 0,
+                itemCount: _contacts.length ?? 0,
                 itemBuilder: (BuildContext context, int index) {
                   Contact c = _contacts.elementAt(index);
                   return ListTile(
@@ -132,10 +132,8 @@ class ContactDetailsPage extends StatelessWidget {
     try {
       var contact = await ContactsService.openExistingContact(_contact,
           iOSLocalizedLabels: iOSLocalizedLabels);
-      if (onContactDeviceSave != null) {
-        onContactDeviceSave(contact);
-      }
-      Navigator.of(context).pop();
+      onContactDeviceSave(contact);
+          Navigator.of(context).pop();
     } on FormOperationException catch (e) {
       switch (e.errorCode) {
         case FormOperationErrorCode.FORM_OPERATION_CANCELED:

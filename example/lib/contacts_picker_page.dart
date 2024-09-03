@@ -43,8 +43,7 @@ class _ContactPickerPageState extends State<ContactPickerPage> {
             child: const Text('Pick a contact'),
             onPressed: _pickContact,
           ),
-          if (_contact != null)
-            Text('Contact selected: ${_contact!.displayName}'),
+          Text('Contact selected: ${_contact!.displayName}'),
         ],
       )),
     );
