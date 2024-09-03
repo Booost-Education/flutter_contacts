@@ -1,27 +1,49 @@
 buildscript {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.0'
+        classpath 'com.android.tools.build:gradle:7.0.2'
     }
 }
+
+// The `plugins` block should be placed outside of `buildscript` and other blocks.
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android' version '1.5.21' apply false
+}
+
+group 'flutter.plugins.contactsservice.contactsservice'
+version '1.0-SNAPSHOT'
 
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 
-rootProject.buildDir = '../build'
-subprojects {
-    project.buildDir = "${rootProject.buildDir}/${project.name}"
-    project.evaluationDependsOn(':app')
+
+android {
+    compileSdkVersion 34
+
+    namespace 'flutter.plugins.contactsservice.contactsservice'
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 34
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    lintOptions {
+        disable 'InvalidPackage'
+    }
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+dependencies {
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'com.google.truth:truth:1.0'
 }
